@@ -8,9 +8,12 @@
   flex-direction: column;
 
   background-color: $bg-primary;
+  color: $light;
 
   .main-container {
     padding: 15px 20px;
+
+    height: 100%;
   }
 }
 
