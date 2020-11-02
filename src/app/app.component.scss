@@ -1,0 +1,16 @@
+@import '../customizedStyle';
+
+.root {
+  font-family: $defaultFontFamily !important;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: $bg-primary;
+
+  .main-container {
+    padding: 15px 20px;
+  }
+}
+

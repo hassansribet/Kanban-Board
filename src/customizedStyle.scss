@@ -1,0 +1,26 @@
+// Import Google fonts
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+
+// Global Styles & Changing Bulma variables
+$defaultFontFamily: 'lato', sans-serif;
+
+$bg-primary: #1f1f1f;
+$bg-secondary: #000000;
+$blue: #1e90ff;
+$light: #bababa;
+$gray: #6e6e6e;
+
+
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+
+
+html, body {
+  height: 100%;
+}
+
+html {
+  overflow-y: auto !important;
+}
