@@ -1,0 +1,146 @@
+@import '../../../../customizedStyle';
+
+.board {
+  display: flex;
+  flex-grow: 1;
+  //overflow-x: auto;
+
+  height: 95%;
+
+  .board-columns {
+    display: flex;
+    flex-grow: 1;
+
+    .board-column {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+
+      min-width: 300px;
+      margin: 15px;
+      padding: 10px;
+
+      border-radius: 5px;
+
+      background-color: $bg-secondary;
+
+      .top-band {
+        position: relative;
+
+        display: flex;
+
+        align-items: center;
+
+        height: 35px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $gray;
+        margin-bottom: 10px;
+
+        .category-name {
+          display: inline-flex;
+          align-items: center;
+          height: 22px;
+          padding: 0 15px;
+          border-radius: 25px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-size: 13px;
+          line-height: 1;
+
+          color: $white;
+
+          span {
+            font-weight: bold;
+          }
+        }
+
+        .color-palette {
+          position: absolute;
+          right: 0;
+
+          width: 20px;
+          height: 20px;
+
+          transition: .3s;
+
+          &:hover {
+            cursor: pointer;
+            transform: rotate(-45deg);
+          }
+        }
+      }
+
+      .tasks-container {
+        overflow-x: auto;
+        flex: 1 1 1px;
+
+        .task {
+          padding: 15px 12px;
+          background-color: $bg-primary;
+
+          border: 1px solid rgba(186, 186, 186, 0.4);
+          border-radius: 5px;
+
+          margin: 0px 10px 10px 0px;
+          transition: .2s;
+
+          cursor: pointer;
+
+          &:hover {
+            border: 1px solid $bg-primary;
+          }
+
+          h2 {
+            font-weight: bold;
+            font-size: 16px;
+
+            border-bottom: 1px solid;
+
+            height: 40px;
+
+            margin-bottom: 7px;
+
+            &:hover {
+              .btn-drag {
+                opacity: 1;
+              }
+            }
+            .btn-drag {
+              float: right;
+
+              opacity: 0;
+
+              cursor: move;
+            }
+          }
+
+          .task-footer {
+
+            .createdAt {
+              transition: .3s;
+
+              &:hover {
+                color: $blue;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.tasks-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.tasks-container::-webkit-scrollbar-track {
+  background-color: $bg-secondary;
+  border-radius: 10px;
+}
+
+.tasks-container::-webkit-scrollbar-thumb {
+  background: $light;
+  border-radius: 10px;
+}

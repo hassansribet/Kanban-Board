@@ -1,0 +1,50 @@
+<div class="header">
+  <h2>Project Name</h2>
+</div>
+
+<div class="board">
+  <div class="board-columns">
+    <div class="board-column">
+      <div class="top-band">
+        <div class="category-name" [style]="'background-color: #2ed573'">
+          <span>Open</span>
+        </div>
+        <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
+      </div>
+
+      <div class="tasks-container">
+        <div *ngFor="let t of tasks" class="task">
+          <h2>Todo {{t}} <i class="fas fa-th btn-drag"></i></h2>
+
+          <div class="task-footer">
+            <span class="createdAt"><i class="fas fa-calendar-alt"></i> 11/02/2020</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="board-column">
+      <div class="top-band">
+        <div class="category-name" [style]="'background-color: #ffa502'">
+          <span>In Progress</span>
+        </div>
+        <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
+      </div>
+
+      <div class="tasks-container">
+
+      </div>
+    </div>
+    <div class="board-column">
+      <div class="top-band">
+        <div class="category-name" [style]="'background-color: #1e90ff'">
+          <span>Closed</span>
+        </div>
+        <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
+      </div>
+
+      <div class="tasks-container">
+
+      </div>
+    </div>
+  </div>
+</div>
