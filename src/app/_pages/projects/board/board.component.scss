@@ -133,6 +133,63 @@
   }
 }
 
+.tasks-container {
+  overflow-x: auto;
+  flex: 1 1 1px;
+}
+
+.task {
+  padding: 15px 12px;
+  background-color: $bg-primary;
+
+  border: 1px solid rgba(186, 186, 186, 0.4);
+  border-radius: 5px;
+
+  margin: 0 0 10px 0;
+  transition: .2s;
+
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid $bg-primary;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 16px;
+
+    border-bottom: 1px solid;
+
+    height: 40px;
+
+    margin-bottom: 7px;
+
+    &:hover {
+      .btn-drag {
+        opacity: 1;
+      }
+    }
+    .btn-drag {
+      float: right;
+
+      opacity: 0;
+
+      cursor: move;
+    }
+  }
+
+  .task-footer {
+
+    .createdAt {
+      transition: .3s;
+
+      &:hover {
+        color: $blue;
+      }
+    }
+  }
+}
+
 .tasks-container::-webkit-scrollbar {
   width: 5px;
 }
@@ -145,4 +202,20 @@
 .tasks-container::-webkit-scrollbar-thumb {
   background: $light;
   border-radius: 10px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

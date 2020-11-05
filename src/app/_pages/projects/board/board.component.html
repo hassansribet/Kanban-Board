@@ -3,7 +3,7 @@
 </div>
 
 <div class="board">
-  <div class="board-columns">
+  <div class="board-columns" cdkDropListGroup>
     <div class="board-column">
       <div class="top-band">
         <div class="category-name" [style]="'background-color: #2ed573'">
@@ -12,9 +12,15 @@
         <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
       </div>
 
-      <div class="tasks-container">
-        <div *ngFor="let t of tasks" class="task">
-          <h2>Todo {{t}} <i class="fas fa-th btn-drag"></i></h2>
+      <div
+        class="tasks-container"
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="todo"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div *ngFor="let t of todo" class="task" cdkDrag>
+          <h2>{{t}} <i class="fas fa-th btn-drag"></i></h2>
 
           <div class="task-footer">
             <span class="createdAt"><i class="fas fa-calendar-alt"></i> 11/02/2020</span>
@@ -31,9 +37,15 @@
         <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
       </div>
 
-      <div class="tasks-container">
-        <div class="task">
-          <h2>Todo <i class="fas fa-th btn-drag"></i></h2>
+      <div
+        class="tasks-container"
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="done"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div *ngFor="let t of done"  class="task" cdkDrag>
+          <h2>{{t}}<i class="fas fa-th btn-drag"></i></h2>
 
           <div class="task-footer">
             <span class="createdAt"><i class="fas fa-calendar-alt"></i> 12/02/2020</span>
