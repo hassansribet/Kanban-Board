@@ -24,6 +24,8 @@ export class BoardComponent implements OnInit {
     'Walk dog'
   ];
 
+  finished = [];
+
   constructor() { }
 
   ngOnInit(): void {
@@ -31,12 +33,18 @@ export class BoardComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>): void {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
+      moveItemInArray(
         event.container.data,
         event.previousIndex,
-        event.currentIndex);
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        0
+      );
     }
 
     console.log(this.todo, this.done);
