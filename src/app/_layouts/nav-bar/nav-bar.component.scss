@@ -1,6 +1,8 @@
 @import '../../../customizedStyle';
 
 .nav-bar {
+  position: relative;
+
   display: flex;
   flex-direction: column;
 
@@ -22,7 +24,7 @@
 
     padding: 0 20px;
 
-    h1 {
+    a {
       color: $light;
 
       font-size: 18px;
@@ -41,6 +43,23 @@
 
         text-shadow: 1px 2px rgba(black, .15);
       }
+    }
+  }
+
+  .nav-items-end {
+    position: absolute;
+    right: 10px;
+
+    display: flex;
+    align-items: center;
+
+    width: auto;
+    height: 100%;
+
+    .user-pict {
+      width: 30px;
+
+      cursor: pointer;
     }
   }
 }

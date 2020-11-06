@@ -1,6 +1,32 @@
 <div class="nav-bar">
   <div class="app-name">
     <i class="fas fa-align-left"></i>
-    <h1>Kanban Board</h1>
+    <a routerLink="/">Kanban Board</a>
+  </div>
+
+  <div class="nav-items-end is-right dropdown is-hoverable">
+    <div class="dropdown-trigger">
+      <img
+        class="user-pict"
+        src="assets/icons/default-user.svg"
+        alt="user"
+        aria-haspopup="true"
+        aria-controls="dropdown-menu4"
+      />
+    </div>
+
+    <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+      <div class="dropdown-content">
+        <a routerLink="/profile" class="dropdown-item">
+          Profile
+        </a>
+        <a routerLink="/profile/settings" class="dropdown-item">
+          Settings
+        </a>
+        <a href="#" class="dropdown-item">
+          Sign Out
+        </a>
+      </div>
+    </div>
   </div>
 </div>

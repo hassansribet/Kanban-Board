@@ -3,7 +3,7 @@
 .board {
   display: flex;
   flex-grow: 1;
-  //overflow-x: auto;
+  overflow-x: scroll;
 
   height: 95%;
 
