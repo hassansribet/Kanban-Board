@@ -6,8 +6,12 @@
         General
       </p>
       <ul class="menu-list">
-        <li><a>Custom Board</a></li>
-        <li><a>Themes</a></li>
+        <li>
+          <a routerLink="/profile/settings/custom-board">Custom Board</a>
+        </li>
+        <li>
+          <a>Themes</a>
+        </li>
       </ul>
 
       <!-- Other -->
@@ -15,12 +19,14 @@
         Other
       </p>
       <ul class="menu-list">
-        <li><a>Preferences</a></li>
+        <li>
+          <a>Preferences</a>
+        </li>
       </ul>
     </aside>
   </div>
 
   <div class="column is-three-quarters">
-    <p>test</p>
+    <router-outlet></router-outlet>
   </div>
 </div>

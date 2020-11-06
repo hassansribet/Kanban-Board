@@ -1,0 +1,18 @@
+<div class="custom-board-container">
+  <span>List of Stages | <a><i class="fas fa-plus-circle"></i></a></span>
+
+  <ngx-table
+    [configuration]="configuration"
+    [data]="stages"
+    [columns]="columns"
+    [noResultsTemplate]="noResultsTemplate"
+  >
+  </ngx-table>
+
+  <ng-template #noResultsTemplate>
+    <td [attr.colspan]="columns.length" class="no-results">
+      No stages found! <a href="#">Try to add</a> the first one!
+    </td>
+  </ng-template>
+
+</div>

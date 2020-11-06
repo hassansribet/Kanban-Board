@@ -4,4 +4,8 @@
 
 @import '../node_modules/bulma/bulma';
 
+@import "~ngx-easy-table/style.scss";
 
+.ngx-table__header-title {
+  color: $light;
+}
