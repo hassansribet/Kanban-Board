@@ -38,7 +38,7 @@ export class CustomBoardComponent implements OnInit  {
       });
       this.loading = false;
       this.initialStages = [...this.stages];
-    }, error => {
+    }, () => {
       this.onError();
     });
   }
@@ -85,10 +85,11 @@ export class CustomBoardComponent implements OnInit  {
   deleteStage(id: string): void {
     if (confirm('Aer you sure ?')) {
       this.stageService.delete(id)
-        .then(res => {
+        .then(() => {
           this.onSuccess('Stage deleted successfully!', 'Delete Stage');
+          this.saveChanges();
         })
-        .catch(err => {
+        .catch(() => {
           this.onError();
         });
     }
@@ -113,24 +114,23 @@ export class CustomBoardComponent implements OnInit  {
     this.modal.close('stageModal');
     if (action === 'save') {
       if (this.newStage) {
-        console.log(this.stage);
         this.stageService.create({
           pos: this.stage.pos,
           label: this.stage.label,
           color: this.stage.color
         })
-          .then(res => {
+          .then(() => {
             this.onSuccess('Stage added successfully!', 'Add Stage');
           })
-          .catch(err => {
+          .catch(() => {
             this.onError();
           });
       } else {
         this.stageService.update(this.stage)
-          .then(res => {
+          .then(() => {
             this.onSuccess('Stage updated successfully!', 'Update Stage');
           })
-          .catch(err => {
+          .catch(() => {
             this.onError();
           });
       }
