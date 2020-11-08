@@ -7,6 +7,9 @@ import { BoardComponent } from './_pages/projects/board/board.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SettingsComponent } from './_pages/profile/settings/settings.component';
 import {AppRoutingModule} from './app-routing.module';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import {AppRoutingModule} from './app-routing.module';
   imports: [
     BrowserModule,
     DragDropModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
