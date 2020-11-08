@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { Stage } from '../../../../_shared/models/stage.model';
+import { StageService } from '../../../../_shared/services/stage.service';
 
 @Component({
   selector: 'app-custom-board',
@@ -9,34 +10,34 @@ import { Stage } from '../../../../_shared/models/stage.model';
   styleUrls: ['./custom-board.component.scss']
 })
 export class CustomBoardComponent implements OnInit  {
+  loading = false;
   stage: Stage;
   newStage = false;
   initialStages: Stage[] = [];
-  stages: Stage[] = [
-    {
-      pos: 1, label: 'Open', color: '#2ed573'
-    },
-    {
-      pos: 2, label: 'In Progress', color: '#ffa502'
-    },
-    {
-      pos: 3, label: 'Closed', color: '#1e90ff'
-    },
-    {
-      pos: 4, label: 'Closed', color: 'blue'
-    },
-    {
-      pos: 5, label: 'Closed', color: 'blue'
-    },
-  ];
+  stages: Stage[] = [];
   errors = [];
   colors = ['#2ed573', '#ffa502', '#1e90ff', '#485460', '#f53b57', '#575fcf'];
 
-  constructor(public modal: NgxSmartModalService) {
+  constructor(
+    public modal: NgxSmartModalService,
+    private stageService: StageService
+  ) {
   }
 
   ngOnInit(): void {
-    this.initialStages = [...this.stages];
+    this.loading = true;
+    this.stageService.getAll().subscribe(data => {
+      this.stages = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as Stage;
+      });
+      this.loading = false;
+      this.initialStages = [...this.stages];
+    }, error => {
+      // TODO show error message
+    });
   }
 
   drop(event: CdkDragDrop<string[]>): void {
@@ -45,11 +46,13 @@ export class CustomBoardComponent implements OnInit  {
 
   checkChanges(): boolean {
     let changed = false;
-    this.stages.forEach((s, i) => {
-      if (s.pos !== this.initialStages[i].pos) {
-        changed = true;
-      }
-    });
+    if (this.stages.length > 0 && !this.loading) {
+      this.stages.forEach((s, i) => {
+        if (s.pos !== this.initialStages[i].pos) {
+          changed = true;
+        }
+      });
+    }
     return changed;
   }
 
@@ -75,8 +78,14 @@ export class CustomBoardComponent implements OnInit  {
     }
   }
 
-  deleteStage(pos: number): void {
-    console.log('delete => ' + pos);
+  deleteStage(id: string): void {
+    this.stageService.delete(id)
+      .then(res => {
+        // TODO show confirmation message
+      })
+      .catch(err => {
+        // TODO show error message
+      });
   }
 
   cancelChanges(): void {
@@ -84,7 +93,10 @@ export class CustomBoardComponent implements OnInit  {
   }
 
   saveChanges(): void {
-    this.initialStages = [...this.stages];
+    this.stages.forEach((s, index) => {
+      s.pos = index + 1;
+      this.stageService.update(s).then();
+    });
   }
 
   modalClosed(): void {
@@ -95,9 +107,26 @@ export class CustomBoardComponent implements OnInit  {
     this.modal.close('stageModal');
     if (action === 'save') {
       if (this.newStage) {
-        console.log('add new stage');
+        console.log(this.stage);
+        this.stageService.create({
+          pos: this.stage.pos,
+          label: this.stage.label,
+          color: this.stage.color
+        })
+          .then(res => {
+            // TODO show confirmation message
+          })
+          .catch(err => {
+            // TODO show error message
+          });
       } else {
-        console.log('update stage');
+        this.stageService.update(this.stage)
+          .then(res => {
+            // TODO show confirmation message
+          })
+          .catch(err => {
+            // TODO show error message
+          });
       }
     }
   }

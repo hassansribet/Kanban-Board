@@ -17,7 +17,7 @@
       <td>{{s.color}}</td>
       <td class="actions">
         <a (click)="openStageModal('edit', i)"><i class="fas fa-pen-square edit-stage"></i></a>
-        <a (click)="deleteStage(i)"><i class="fas fa-trash-alt delete-stage"></i></a>
+        <a (click)="deleteStage(s.id)"><i class="fas fa-trash-alt delete-stage"></i></a>
       </td>
     </tr>
     </tbody>
