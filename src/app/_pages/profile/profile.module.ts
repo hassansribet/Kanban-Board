@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { CustomBoardComponent } from './settings/custom-board/custom-board.component';
 import { TableModule } from 'ngx-easy-table';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { TableModule } from 'ngx-easy-table';
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    TableModule
+    TableModule,
+    DragDropModule,
+    NgxSmartModalModule.forRoot(),
+    FormsModule
   ]
 })
 export class ProfileModule { }

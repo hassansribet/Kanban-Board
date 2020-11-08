@@ -3,7 +3,11 @@
 .settings-container {
   margin: 30px;
   .side-bar {
-    border: 1px solid $light;
-    border-radius: 5px;
+    aside {
+      padding: 20px;
+
+      border: 1px solid $light;
+      border-radius: 5px;
+    }
   }
 }

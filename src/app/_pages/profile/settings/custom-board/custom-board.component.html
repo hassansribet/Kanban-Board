@@ -1,19 +1,81 @@
 <div class="custom-board-container">
-  <span>List of Stages | <a><i class="fas fa-plus-circle"></i></a></span>
+  <span>List of Stages | <a (click)="openStageModal('new')"><i class="fas fa-plus-circle"></i></a></span>
 
-  <ngx-table
-    [configuration]="configuration"
-    [data]="stages"
-    [columns]="columns"
-    [noResultsTemplate]="noResultsTemplate"
-    [draggable]="true"
-  >
-  </ngx-table>
+  <table cdkDropList class="tab-stages" (cdkDropListDropped)="drop($event)">
+    <thead>
+      <tr>
+        <th>Pos</th>
+        <th>Label</th>
+        <th>Color</th>
+      </tr>
+    </thead>
 
-  <ng-template #noResultsTemplate>
-    <td [attr.colspan]="columns.length" class="no-results">
+    <tbody >
+    <tr *ngFor="let s of stages;let i = index;" cdkDrag>
+      <td>{{i + 1}}</td>
+      <td>{{s.label}}</td>
+      <td>{{s.color}}</td>
+      <td class="actions">
+        <a (click)="openStageModal('edit', i)"><i class="fas fa-pen-square edit-stage"></i></a>
+        <a (click)="deleteStage(i)"><i class="fas fa-trash-alt delete-stage"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <ng-template>
+    <td [attr.colspan]="3" class="no-results">
       No stages found! <a href="#">Try to add</a> the first one!
     </td>
   </ng-template>
 
+  <div *ngIf="checkChanges()" class="stages-actions">
+    <button (click)="cancelChanges()" class="button is-small cancel-changes is-text">Cancel</button>
+    <button (click)="saveChanges()" class="button is-small save-changes">Save</button>
+  </div>
 </div>
+
+<ngx-smart-modal class="stage-modal-form" identifier="stageModal" (onClose)="modalClosed()">
+  <div *ngIf="stage !== undefined">
+    <form>
+
+      <div class="field">
+        <label for="pos" class="label is-small">Position:</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-small" type="text" placeholder="0" id="pos" name="pos" (change)="why()" [(ngModel)]="stage.pos" [disabled]="true">
+          <span class="icon is-small is-left">
+            <i class="fas fa-map-marker-alt"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="label" class="label is-small">Stage Label:</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-small" type="text" placeholder="Enter a label ..." id="label" name="label" [(ngModel)]="stage.label">
+          <span class="icon is-small is-left">
+            <i class="fas fa-tags" [style.color]="(stage !== undefined) ? stage.color : '#ffa502'"></i>
+          </span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label is-small">Color:</label>
+
+        <div class="columns">
+          <div *ngFor="let c of colors" class="column">
+            <label class="radio color-option">
+              <input type="radio" name="color" (click)="stage.color = c">
+              <div class="display-color" [style.backgroundColor]="c"></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button (click)="closeModal('cancel')" class="button is-small is-text">Cancel</button>
+        <button (click)="closeModal('save')" class="button is-small is-primary">{{newStage ? 'Add' : 'Update'}}</button>
+      </div>
+    </form>
+  </div>
+</ngx-smart-modal>
+

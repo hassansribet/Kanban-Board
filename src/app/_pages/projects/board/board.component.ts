@@ -46,8 +46,6 @@ export class BoardComponent implements OnInit {
         0
       );
     }
-
-    console.log(this.todo, this.done);
   }
 
 }
