@@ -7,7 +7,19 @@
 @import "~ngx-easy-table/style.scss";
 
 @import "~ngx-smart-modal/ngx-smart-modal";
-
 .ngx-table__header-title {
   color: $light;
+}
+
+@import '~ngx-toastr/toastr';
+#toast-container>.toast-success {
+  background-color: #2ed573 !important;
+}
+
+#toast-container>.toast-error {
+  background-color: #e74c3c !important;
+}
+
+#toast-container>.toast-warning {
+  background-color: $yellow !important;
 }

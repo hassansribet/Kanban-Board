@@ -6,10 +6,16 @@ import { NavBarComponent } from './_layouts/nav-bar/nav-bar.component';
 import { BoardComponent } from './_pages/projects/board/board.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SettingsComponent } from './_pages/profile/settings/settings.component';
+
 import {AppRoutingModule} from './app-routing.module';
+
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +30,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

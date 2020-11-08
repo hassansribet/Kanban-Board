@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { Stage } from '../../../../_shared/models/stage.model';
 import { StageService } from '../../../../_shared/services/stage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-custom-board',
@@ -13,6 +14,7 @@ export class CustomBoardComponent implements OnInit  {
   loading = false;
   stage: Stage;
   newStage = false;
+  pos = 0;
   initialStages: Stage[] = [];
   stages: Stage[] = [];
   errors = [];
@@ -20,7 +22,8 @@ export class CustomBoardComponent implements OnInit  {
 
   constructor(
     public modal: NgxSmartModalService,
-    private stageService: StageService
+    private stageService: StageService,
+    private toast: ToastrService,
   ) {
   }
 
@@ -36,7 +39,7 @@ export class CustomBoardComponent implements OnInit  {
       this.loading = false;
       this.initialStages = [...this.stages];
     }, error => {
-      // TODO show error message
+      this.onError();
     });
   }
 
@@ -62,15 +65,16 @@ export class CustomBoardComponent implements OnInit  {
         if (this.stages.length < 6) {
           this.newStage = true;
           this.stage = new Stage(this.stages.length + 1, '');
+          this.pos = this.stage.pos;
           this.modal.open('stageModal');
         } else {
-          // TODO show error message
-          console.log('maximum 6 stages');
+          this.onWarning('Maximum 6 Stages', 'Stages limit');
         }
         break;
       case 'edit':
         this.newStage = false;
         this.stage = {...this.stages[pos]};
+        this.pos = this.stage.pos;
         this.modal.open('stageModal');
         break;
       default:
@@ -79,13 +83,15 @@ export class CustomBoardComponent implements OnInit  {
   }
 
   deleteStage(id: string): void {
-    this.stageService.delete(id)
-      .then(res => {
-        // TODO show confirmation message
-      })
-      .catch(err => {
-        // TODO show error message
-      });
+    if (confirm('Aer you sure ?')) {
+      this.stageService.delete(id)
+        .then(res => {
+          this.onSuccess('Stage deleted successfully!', 'Delete Stage');
+        })
+        .catch(err => {
+          this.onError();
+        });
+    }
   }
 
   cancelChanges(): void {
@@ -114,25 +120,37 @@ export class CustomBoardComponent implements OnInit  {
           color: this.stage.color
         })
           .then(res => {
-            // TODO show confirmation message
+            this.onSuccess('Stage added successfully!', 'Add Stage');
           })
           .catch(err => {
-            // TODO show error message
+            this.onError();
           });
       } else {
         this.stageService.update(this.stage)
           .then(res => {
-            // TODO show confirmation message
+            this.onSuccess('Stage updated successfully!', 'Update Stage');
           })
           .catch(err => {
-            // TODO show error message
+            this.onError();
           });
       }
     }
   }
 
+  onSuccess(message: string, title: string): void {
+    this.toast.success(message, title);
+  }
+
+  onWarning(message: string, title: string): void {
+    this.toast.warning(message, title);
+  }
+
+  onError(): void {
+    this.toast.error('Sorry, try later!', 'Error');
+  }
+
   why(): void {
-    // TODO show error message
-    console.log('why you do this :(');
+    this.stage.pos = this.pos;
+    this.onWarning('why you do this :(', 'Why');
   }
 }
