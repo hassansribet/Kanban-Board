@@ -64,7 +64,7 @@
         <div class="columns">
           <div *ngFor="let c of colors" class="column">
             <label class="radio color-option">
-              <input type="radio" name="color" (click)="stage.color = c">
+              <input type="radio" name="color" [value]="c" [(ngModel)]="stage.color" (click)="stage.color = c">
               <div class="display-color" [style.backgroundColor]="c"></div>
             </label>
           </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { Stage } from '../../../../_shares/models/stage.model';
+import { Stage } from '../../../../_shared/models/stage.model';
 
 @Component({
   selector: 'app-custom-board',
@@ -28,11 +28,9 @@ export class CustomBoardComponent implements OnInit  {
     {
       pos: 5, label: 'Closed', color: 'blue'
     },
-    {
-      pos: 6, label: 'Closed', color: 'blue'
-    }
   ];
-  colors = ['#2ed573', '#ffa502', '#1e90ff', '#485460', '#f53b57', '#0fbcf9'];
+  errors = [];
+  colors = ['#2ed573', '#ffa502', '#1e90ff', '#485460', '#f53b57', '#575fcf'];
 
   constructor(public modal: NgxSmartModalService) {
   }
@@ -56,12 +54,11 @@ export class CustomBoardComponent implements OnInit  {
   }
 
   openStageModal(typeOfAction: string, pos?: number): void {
-
     switch (typeOfAction) {
       case 'new':
         if (this.stages.length < 6) {
+          this.newStage = true;
           this.stage = new Stage(this.stages.length + 1, '');
-          console.log(typeOfAction, this.stage);
           this.modal.open('stageModal');
         } else {
           // TODO show error message
@@ -69,8 +66,8 @@ export class CustomBoardComponent implements OnInit  {
         }
         break;
       case 'edit':
+        this.newStage = false;
         this.stage = {...this.stages[pos]};
-        console.log(typeOfAction, this.stage);
         this.modal.open('stageModal');
         break;
       default:
@@ -87,7 +84,7 @@ export class CustomBoardComponent implements OnInit  {
   }
 
   saveChanges(): void {
-    console.log('save changes');
+    this.initialStages = [...this.stages];
   }
 
   modalClosed(): void {
@@ -105,8 +102,8 @@ export class CustomBoardComponent implements OnInit  {
     }
   }
 
-
   why(): void {
+    // TODO show error message
     console.log('why you do this :(');
   }
 }

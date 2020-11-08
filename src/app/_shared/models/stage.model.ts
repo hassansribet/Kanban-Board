@@ -8,6 +8,6 @@ export class Stage {
     this.id = '';
     this.pos = pos;
     this.label = label;
-    this.color = '#ffa502';
+    this.color = '#2ed573';
   }
 }
