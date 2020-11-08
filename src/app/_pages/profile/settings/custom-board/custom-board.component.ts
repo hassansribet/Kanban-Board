@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './custom-board.component.html',
   styleUrls: ['./custom-board.component.scss']
 })
+
 export class CustomBoardComponent implements OnInit  {
   loading = false;
   stage: Stage;

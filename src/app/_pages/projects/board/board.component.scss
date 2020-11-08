@@ -3,7 +3,7 @@
 .board {
   display: flex;
   flex-grow: 1;
-  overflow-x: scroll;
+  overflow-x: auto;
 
   height: 95%;
 
@@ -71,6 +71,15 @@
             transform: rotate(-45deg);
           }
         }
+        .tasks-count {
+          position: absolute;
+          right: 0;
+
+          width: auto;
+
+          transition: .3s;
+        }
+
       }
 
       .tasks-container {
@@ -129,6 +138,64 @@
           }
         }
       }
+      .first-task {
+        z-index: 9999;
+        text-align: center;
+
+        img {
+          width: 200px;
+
+          filter: invert(1);
+        }
+
+        h2 {
+          font-weight: bold;
+        }
+
+        p {
+          padding: 0 10px;
+
+          color: #7a7a7a;
+
+          font-size: 14px;
+        }
+
+        .create-task {
+          border: none;
+
+          color: $white;
+
+          background-color: $blue;
+
+          margin: 5px 0;
+
+          border-radius: 10px;
+
+          &:hover {
+            background-color: darken($blue, 10%);
+          }
+        }
+      }
+
+      .no-tasks {
+        z-index: 9999;
+        text-align: center;
+
+        img {
+          padding: 30px;
+
+          filter: invert(1);
+        }
+
+        p {
+          padding: 0 10px;
+
+          color: #7a7a7a;
+
+          font-size: 14px;
+        }
+      }
+
     }
   }
 }
@@ -217,13 +284,13 @@
 }
 
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 100ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .cdk-drop-list-dragging .cdk-drag {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 100ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .cdk-drag-animating {
-  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 100ms cubic-bezier(0, 0, 0.2, 1);
 }

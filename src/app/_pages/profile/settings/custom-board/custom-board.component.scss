@@ -56,12 +56,14 @@
     border-bottom: 1px solid $light;
 
     th {
+      color: #7a7a7a;
+
       height: 30px;
     }
   }
 
   tbody {
-    tr {
+    .tr-stages {
       cursor: pointer;
 
       &:hover {

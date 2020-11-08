@@ -4,27 +4,43 @@
 
 <div class="board">
   <div class="board-columns" cdkDropListGroup>
-    <div *ngFor="let s of stages;" class="board-column">
+    <div *ngFor="let s of stages;let i = index;" class="board-column">
       <div class="top-band">
         <div class="category-name" [style.backgroundColor]="s.color">
           <span>{{s.label}}</span>
         </div>
-        <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
+<!--        <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">-->
+        <div class="tasks-count">
+          <span><i class="fas fa-clipboard"></i>&nbsp;&nbsp;{{s.tasks.length}}</span>
+        </div>
       </div>
 
       <div
         class="tasks-container"
         cdkDropList
-        #todoList="cdkDropList"
         [cdkDropListData]="s.tasks"
         (cdkDropListDropped)="drop($event)"
       >
-        <div *ngFor="let t of s.tasks" class="task" cdkDragLockAxis="x" cdkDrag>
-          <h2>{{t}} <i class="fas fa-th btn-drag"></i></h2>
+        <div *ngFor="let t of s.tasks;" class="task" cdkDragLockAxis="x" cdkDrag>
+          <h2>{{t.label}} <i class="fas fa-th btn-drag"></i></h2>
 
           <div class="task-footer">
             <span class="createdAt"><i class="fas fa-calendar-alt"></i> 11/02/2020</span>
           </div>
+        </div>
+
+        <div *ngIf="s.tasks.length === 0 && i === 0" class="first-task">
+          <img src="assets/images/create-task.svg" alt="Drag">
+          <h2>Create your Task</h2>
+          <p>Build your Project with your tasks.</p>
+          <button class="button is-small create-task">
+            Create Task
+          </button>
+        </div>
+
+        <div *ngIf="s.tasks.length === 0 && i > 0" class="no-tasks">
+          <img src="assets/images/drag&drop.svg" alt="Drag">
+          <p>Dran an existing Task and drop it under this category.</p>
         </div>
       </div>
     </div>

@@ -14,7 +14,6 @@ import {FormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    TableModule,
     DragDropModule,
     NgxSmartModalModule.forRoot(),
     FormsModule

@@ -28,6 +28,18 @@ export class BoardComponent implements OnInit {
         } as Stage;
       });
       this.loading = false;
+      this.stages[0].tasks.push({
+        id: 'adadazd',
+        label: 'task 01'
+      });
+      this.stages[0].tasks.push({
+        id: 'adadazd',
+        label: 'task 02'
+      });
+      this.stages[0].tasks.push({
+        id: 'adadazd',
+        label: 'task 03'
+      });
     }, error => {
       // this.onError();
     });

@@ -4,8 +4,6 @@
 
 @import '../node_modules/bulma/bulma';
 
-@import "~ngx-easy-table/style.scss";
-
 @import "~ngx-smart-modal/ngx-smart-modal";
 .ngx-table__header-title {
   color: $light;
@@ -23,3 +21,5 @@
 #toast-container>.toast-warning {
   background-color: $yellow !important;
 }
+
+

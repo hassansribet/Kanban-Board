@@ -11,7 +11,7 @@
     </thead>
 
     <tbody >
-    <tr *ngFor="let s of stages;let i = index;" cdkDrag>
+    <tr class="tr-stages" *ngFor="let s of stages;let i = index;" cdkDrag>
       <td>{{i + 1}}</td>
       <td>{{s.label}}</td>
       <td>{{s.color}}</td>
@@ -20,14 +20,13 @@
         <a (click)="deleteStage(s.id)"><i class="fas fa-trash-alt delete-stage"></i></a>
       </td>
     </tr>
+    <tr *ngIf="stages.length === 0">
+      <td [attr.colspan]="3" class="no-results">
+        No stages found! <a (click)="openStageModal('new')">Try to add</a> the first one!
+      </td>
+    </tr>
     </tbody>
   </table>
-
-  <ng-template>
-    <td [attr.colspan]="3" class="no-results">
-      No stages found! <a href="#">Try to add</a> the first one!
-    </td>
-  </ng-template>
 
   <div *ngIf="checkChanges()" class="stages-actions">
     <button (click)="cancelChanges()" class="button is-small cancel-changes is-text">Cancel</button>
