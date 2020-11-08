@@ -4,10 +4,10 @@
 
 <div class="board">
   <div class="board-columns" cdkDropListGroup>
-    <div class="board-column">
+    <div *ngFor="let s of stages;" class="board-column">
       <div class="top-band">
-        <div class="category-name" [style]="'background-color: #2ed573'">
-          <span>Open</span>
+        <div class="category-name" [style.backgroundColor]="s.color">
+          <span>{{s.label}}</span>
         </div>
         <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
       </div>
@@ -16,163 +16,14 @@
         class="tasks-container"
         cdkDropList
         #todoList="cdkDropList"
-        [cdkDropListData]="todo"
+        [cdkDropListData]="s.tasks"
         (cdkDropListDropped)="drop($event)"
       >
-        <div *ngFor="let t of todo" class="task" cdkDragLockAxis="x" cdkDrag>
+        <div *ngFor="let t of s.tasks" class="task" cdkDragLockAxis="x" cdkDrag>
           <h2>{{t}} <i class="fas fa-th btn-drag"></i></h2>
 
           <div class="task-footer">
             <span class="createdAt"><i class="fas fa-calendar-alt"></i> 11/02/2020</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="board-column">
-      <div class="top-band">
-        <div class="category-name" [style]="'background-color: #ffa502'">
-          <span>In Progress</span>
-        </div>
-        <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
-      </div>
-
-      <div
-        class="tasks-container"
-        cdkDropList
-        #doneList="cdkDropList"
-        [cdkDropListData]="done"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div *ngFor="let t of done"  class="task" cdkDragLockAxis="x" cdkDrag>
-          <h2>{{t}}<i class="fas fa-th btn-drag"></i></h2>
-
-          <div class="task-footer">
-            <span class="createdAt"><i class="fas fa-calendar-alt"></i> 12/02/2020</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="board-column">
-      <div class="top-band">
-        <div class="category-name" [style]="'background-color: #1e90ff'">
-          <span>Closed</span>
-        </div>
-        <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
-      </div>
-
-      <div
-        class="tasks-container"
-        cdkDropList
-        #finishedList="cdkDropList"
-        [cdkDropListData]="finished"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div *ngFor="let t of finished"  class="task" cdkDragLockAxis="x" cdkDrag>
-          <h2>{{t}}<i class="fas fa-th btn-drag"></i></h2>
-
-          <div class="task-footer">
-            <span class="createdAt"><i class="fas fa-calendar-alt"></i> 12/02/2020</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="board-column">
-      <div class="top-band">
-        <div class="category-name" [style]="'background-color: #1e90ff'">
-          <span>Closed</span>
-        </div>
-        <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
-      </div>
-
-      <div
-        class="tasks-container"
-        cdkDropList
-        #finishedList="cdkDropList"
-        [cdkDropListData]="finished"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div *ngFor="let t of finished"  class="task" cdkDragLockAxis="x" cdkDrag>
-          <h2>{{t}}<i class="fas fa-th btn-drag"></i></h2>
-
-          <div class="task-footer">
-            <span class="createdAt"><i class="fas fa-calendar-alt"></i> 12/02/2020</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="board-column">
-      <div class="top-band">
-        <div class="category-name" [style]="'background-color: #1e90ff'">
-          <span>Closed</span>
-        </div>
-        <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
-      </div>
-
-      <div
-        class="tasks-container"
-        cdkDropList
-        #finishedList="cdkDropList"
-        [cdkDropListData]="finished"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div *ngFor="let t of finished"  class="task" cdkDragLockAxis="x" cdkDrag>
-          <h2>{{t}}<i class="fas fa-th btn-drag"></i></h2>
-
-          <div class="task-footer">
-            <span class="createdAt"><i class="fas fa-calendar-alt"></i> 12/02/2020</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="board-column">
-      <div class="top-band">
-        <div class="category-name" [style]="'background-color: #1e90ff'">
-          <span>Closed</span>
-        </div>
-        <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
-      </div>
-
-      <div
-        class="tasks-container"
-        cdkDropList
-        #finishedList="cdkDropList"
-        [cdkDropListData]="finished"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div *ngFor="let t of finished"  class="task" cdkDragLockAxis="x" cdkDrag>
-          <h2>{{t}}<i class="fas fa-th btn-drag"></i></h2>
-
-          <div class="task-footer">
-            <span class="createdAt"><i class="fas fa-calendar-alt"></i> 12/02/2020</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="board-column">
-      <div class="top-band">
-        <div class="category-name" [style]="'background-color: #1e90ff'">
-          <span>Closed</span>
-        </div>
-        <img class="color-palette" src="assets/icons/colors-palette.svg" alt="colors">
-      </div>
-
-      <div
-        class="tasks-container"
-        cdkDropList
-        #finishedList="cdkDropList"
-        [cdkDropListData]="finished"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div *ngFor="let t of finished"  class="task" cdkDragLockAxis="x" cdkDrag>
-          <h2>{{t}}<i class="fas fa-th btn-drag"></i></h2>
-
-          <div class="task-footer">
-            <span class="createdAt"><i class="fas fa-calendar-alt"></i> 12/02/2020</span>
           </div>
         </div>
       </div>

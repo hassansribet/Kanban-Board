@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { StageService } from '../../../_shared/services/stage.service';
+import { Stage } from '../../../_shared/models/stage.model';
+import { Task } from 'src/app/_shared/models/task.model';
 
 @Component({
   selector: 'app-kanban-board',
@@ -7,31 +10,30 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-  tasks = [1, 2, 3, 4, 5, 6];
+  loading = false;
+  stages: Stage[] = [];
 
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
-
-  done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
-
-  finished = [];
-
-  constructor() { }
+  constructor(
+    private stageService: StageService,
+  ) { }
 
   ngOnInit(): void {
+    this.loading = true;
+    this.stageService.getAll().subscribe(data => {
+      this.stages = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          tasks: [],
+          ...e.payload.doc.data()
+        } as Stage;
+      });
+      this.loading = false;
+    }, error => {
+      // this.onError();
+    });
   }
 
-  drop(event: CdkDragDrop<string[]>): void {
+  drop(event: CdkDragDrop<Task[], any>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
